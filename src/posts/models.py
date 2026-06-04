@@ -1,6 +1,16 @@
 from django.db import models
 from django.utils import timezone
 from users.models import Author
+
+class PostQuerySet(models.QuerySet):
+
+    def published(self):
+        return self.filter(status=Post.Status.PUBLISHED)
+
+    def drafts(self):
+        return self.filter(status=Post.Status.DRAFT)
+
+
 class Post(models.Model):
     class Status(models.TextChoices):
         DRAFT = 'draft', 'Draft'
@@ -14,6 +24,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=10, choices=Status.choices, default='draft')
+    objects = PostQuerySet.as_manager()
+
     def __str__(self):
         return self.title
     
@@ -22,6 +34,13 @@ class Post(models.Model):
         verbose_name = 'post'
         verbose_name_plural = 'posts'
     
+class CommentQuerySet(models.QuerySet):
+
+    def approved(self):
+        return self.filter(active=True)
+
+    def pending(self):
+        return self.filter(active=False)
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=100)
@@ -29,7 +48,8 @@ class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=False)
+    objects = CommentQuerySet.as_manager()
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
     class Meta:
