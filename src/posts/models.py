@@ -23,6 +23,8 @@ class Post(models.Model):
     published_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
+    views = models.IntegarField(default=0)
+    likes = models.IntegarField(default=0)
     status = models.CharField(max_length=10, choices=Status.choices, default='draft')
     objects = PostQuerySet.as_manager()
 
