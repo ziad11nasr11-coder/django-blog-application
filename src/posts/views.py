@@ -68,3 +68,17 @@ def post_share(request, post_id):
             "sent": sent,
         },
     )
+
+
+def post_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+
+    return redirect(post.get_absolute_url())
