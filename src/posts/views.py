@@ -71,7 +71,12 @@ def post_share(request, post_id):
 
 
 def post_comment(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    post = get_object_or_404(
+        Post.objects.published(),
+        pk=post_id
+    )
+
+    comments = post.comments.filter(active=True)
 
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -81,4 +86,16 @@ def post_comment(request, post_id):
             comment.post = post
             comment.save()
 
-    return redirect(post.get_absolute_url())
+            return redirect(post.get_absolute_url())
+    else:
+        form = CommentForm()
+
+    return render(
+        request,
+        "blog/post/detail.html",
+        {
+            "post": post,
+            "comments": comments,
+            "form": form,
+        },
+    )
