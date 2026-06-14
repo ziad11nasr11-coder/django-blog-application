@@ -17,6 +17,7 @@ class Post(models.Model):
         PUBLISHED = 'published', 'Published'
         ARCHIVED = 'archived', 'Archived'
     title = models.CharField(max_length=250)
+    tags = TaggableManager(blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='posts')
     slug = models.SlugField(unique=True, max_length=250)
     content = models.TextField()

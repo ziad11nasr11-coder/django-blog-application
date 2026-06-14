@@ -9,7 +9,13 @@ def post_list(request):
     paginator = Paginator(post_list,10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    #return render (request, 'home.html', {'posts' = posts }
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        posts = posts.filter(tags__in=[tag])
+    
+    #return render (request, 'home.html', {'posts' = posts, 'tag': tag }
 
 def post_detail(request, year, month, day, slug):
     post = get_object_or_404(
