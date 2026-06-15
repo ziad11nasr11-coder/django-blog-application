@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from .forms import EMAILPOSTFORM
 from .forms import CommentForm
+from django.db.models import count
 def post_list(request):
     posts = Post.PUBLISHED.all().order_by('-id')
     paginator = Paginator(post_list,10)
@@ -27,8 +28,18 @@ def post_detail(request, year, month, day, slug):
     )
     comments = post.comments.filter(active=True)
     form = CommentForm()
+  
+    post_tags_ids = post.tags.values_list("id", flat=True)
 
-    #return render(  request,"blog/post_detail.html",{"post": post},"comments": comments, "form": form )
+    similar_posts = (
+       Post.objects.published().
+       filter(tags__in=post_tags_ids).
+       exclude(id=post.id).
+       annotate(same_tags=Count("tags")).
+       order_by("-same_tags", "-publish")[:4]
+)
+
+    #return render(  request,"blog/post_detail.html",{"post": post},"comments": comments, "form": form, "similar_posts": similar_posts )
 
 def post_share(request, post_id):
     post = get_object_or_404(Post, id=post_id)
