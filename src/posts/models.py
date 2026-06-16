@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from users.models import Author
+from taggit.managers import TaggableManager
 
 class PostQuerySet(models.QuerySet):
 
