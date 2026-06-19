@@ -16,20 +16,20 @@ class LatestPostsFeed(Feed):
         return (
             Post.objects.published()
             .select_related("author")
-            .order_by("-publish")[:10]
+            .order_by("-published_at")[:10]
         )
 
     def item_title(self, item):
         return item.title
 
     def item_description(self, item):
-        return truncatewords_html(item.body, 40)
+        return truncatewords_html(item.content, 40)
 
     def item_link(self, item):
         return item.get_absolute_url()
 
     def item_pubdate(self, item):
-        return item.publish
+        return item.published_at
 
     def item_author_name(self, item):
         return item.author.get_full_name() or item.author.username

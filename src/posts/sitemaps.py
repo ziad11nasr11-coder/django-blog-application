@@ -1,11 +1,12 @@
 from django.contrib.sitemaps import Sitemap
 from blog.models import Post
 
+
 class PostSitemap(Sitemap):
-    changefreq = "weekly"
+    priority = 0.7
 
     def items(self):
-        return Post.objects.filter(status="published")
+        return Post.objects.published()
 
     def lastmod(self, obj):
         return obj.updated_at or obj.created_at
@@ -18,3 +19,4 @@ class PostSitemap(Sitemap):
 
     def changefreq(self, obj):
         return "daily" if getattr(obj, "featured", False) else "weekly"
+

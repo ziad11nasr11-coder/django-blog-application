@@ -13,7 +13,7 @@ except ImportError:
 
 
 def post_list(request, tag_slug=None):
-    posts = Post.published.all().order_by('-publish')
+    posts = Post.objects.published().order_by('-published_at')
     tag = None
 
     if tag_slug and Tag:
@@ -35,9 +35,9 @@ def post_detail(request, year, month, day, slug):
         Post,
         slug=slug,
         status=Post.Status.PUBLISHED,
-        publish__year=year,
-        publish__month=month,
-        publish__day=day,
+        published_at__year=year,
+        published_at__month=month,
+        published_at__day=day,
     )
 
     comments = post.comments.filter(active=True)
@@ -48,9 +48,16 @@ def post_detail(request, year, month, day, slug):
         Post.published.filter(tags__in=post_tags_ids)
         .exclude(id=post.id)
         .annotate(same_tags=Count('tags'))
-        .order_by('-same_tags', '-publish')[:4]
+        .order_by('-same_tags', '-published_at')[:4]
     )
 
+     if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect(post.get_absolute_url())
     return render(request, 'blog/post/detail.html', {
         'post': post,
         'comments': comments,
@@ -91,7 +98,6 @@ def post_share(request, post_id):
 
 def post_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
-    comments = post.comments.filter(active=True)
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -100,10 +106,19 @@ def post_comment(request, post_id):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect(post.get_absolute_url())
+           return redirect(post.get_absolute_url())
     else:
         form = CommentForm()
-
+    
+    comments = post.comments.filter(active=True)
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    similar_posts = (
+        Post.objects.published()
+        .filter(tags__in=post_tags_ids)
+        .exclude(id=post.id)
+        .annotate(same_tags=Count('tags'))
+        .order_by('-same_tags', '-published_at')[:4]
+    )
     return render(request, 'blog/post/detail.html', {
         'post': post,
         'comments': comments,

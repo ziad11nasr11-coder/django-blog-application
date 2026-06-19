@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 from users.models import Author
 from taggit.managers import TaggableManager
 
@@ -10,6 +11,9 @@ class PostQuerySet(models.QuerySet):
 
     def drafts(self):
         return self.filter(status=Post.Status.DRAFT)
+
+    def archived(self):
+        return self.filter(status=Post.Status.ARCHIVED)
 
 
 class Post(models.Model):
@@ -32,12 +36,14 @@ class Post(models.Model):
     
    
     def get_absolute_url(self):
-        return reverse(
+       if not self.published_at:
+          return '/' 
+       return reverse(
             "post_detail",
             args=[
-                self.publish.year,
-                self.publish.month,
-                self.publish.day,
+                self.published_at.year,
+                self.published_at.month,
+                self.published_at.day,
                 self.slug,
             ],
         )
