@@ -4,6 +4,25 @@ from django.urls import reverse
 from users.models import Author
 from taggit.managers import TaggableManager
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='categories/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    def get_absolute_url(self):
+        return reverse("blog:post_list_by_category", args=[self.slug])
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
+
 class PostQuerySet(models.QuerySet):
 
     def published(self):
@@ -24,6 +43,13 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     tags = TaggableManager(blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='posts')
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='posts',
+    )
     slug = models.SlugField(unique=True, max_length=250)
     content = models.TextField()
     published_at = models.DateTimeField(auto_now_add=True)
