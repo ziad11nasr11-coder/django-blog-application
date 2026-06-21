@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.db.models import Count
 
-from .models import Post
+from .models import Post, Comment, Category
 from .forms import EmailPostForm, CommentForm
 
 try:
@@ -15,10 +15,15 @@ except ImportError:
 def post_list(request, tag_slug=None):
     posts = Post.objects.published().order_by('-published_at')
     tag = None
+    category = None
 
     if tag_slug and Tag:
         tag = get_object_or_404(Tag, slug=tag_slug)
         posts = posts.filter(tags__in=[tag])
+   
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug, is_active=True)
+        posts = posts.filter(category=category)
 
     paginator = Paginator(posts, 10)
     page_number = request.GET.get('page')
@@ -27,6 +32,7 @@ def post_list(request, tag_slug=None):
     return render(request, 'blog/post/list.html', {
         'posts': page_obj,
         'tag': tag,
+        'category': category,
     })
 
 
