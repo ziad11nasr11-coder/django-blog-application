@@ -12,7 +12,7 @@ except ImportError:
     Tag = None
 
 
-def post_list(request, tag_slug=None):
+def post_list(request, tag_slug=None, category_slug=None):
     posts = Post.objects.published().order_by('-published_at')
     tag = None
     category = None
@@ -20,7 +20,7 @@ def post_list(request, tag_slug=None):
     if tag_slug and Tag:
         tag = get_object_or_404(Tag, slug=tag_slug)
         posts = posts.filter(tags__in=[tag])
-   
+
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug, is_active=True)
         posts = posts.filter(category=category)
@@ -29,7 +29,7 @@ def post_list(request, tag_slug=None):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'blog/post/list.html', {
+    return render(request, 'post/list.html', {
         'posts': page_obj,
         'tag': tag,
         'category': category,
@@ -57,14 +57,14 @@ def post_detail(request, year, month, day, slug):
         .order_by('-same_tags', '-published_at')[:4]
     )
 
-     if request.method == 'POST':
+    if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
             return redirect(post.get_absolute_url())
-    return render(request, 'blog/post/detail.html', {
+    return render(request, 'post/detail.html', {
         'post': post,
         'comments': comments,
         'form': form,
@@ -95,7 +95,7 @@ def post_share(request, post_id):
     else:
         form = EmailPostForm()
 
-    return render(request, 'blog/post/share.html', {
+    return render(request, 'post/share.html', {
         'post': post,
         'form': form,
         'sent': sent,
@@ -112,7 +112,7 @@ def post_comment(request, post_id):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-           return redirect(post.get_absolute_url())
+        return redirect(post.get_absolute_url())
     else:
         form = CommentForm()
     
@@ -125,7 +125,7 @@ def post_comment(request, post_id):
         .annotate(same_tags=Count('tags'))
         .order_by('-same_tags', '-published_at')[:4]
     )
-    return render(request, 'blog/post/detail.html', {
+    return render(request, 'post/detail.html', {
         'post': post,
         'comments': comments,
         'form': form,

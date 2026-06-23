@@ -36,7 +36,7 @@ urlpatterns = [
     ),
     path(
         "feed/",
-         LatestPostsFeed(),
-         name="post_feed"),
+        LatestPostsFeed(),
+        name="post_feed"),
 
 ]

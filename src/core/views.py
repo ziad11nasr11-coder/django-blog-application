@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from posts.model import Post
+from posts.models import Post
 
 def home(request):
-    posts = Post.objects.published().order_by("-publish")[:10]
+    posts = Post.objects.published().order_by("-published_at")[:10]
 
     most_viewed = (
         Post.objects.published()

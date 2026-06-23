@@ -13,7 +13,7 @@ class Category(models.Model):
     is_active = models.BooleanField(default=True)
 
     def get_absolute_url(self):
-        return reverse("blog:post_list_by_category", args=[self.slug])
+        return reverse("post_list_by_category", args=[self.slug])
 
     def __str__(self):
         return self.name
