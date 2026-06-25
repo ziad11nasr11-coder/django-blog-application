@@ -8,7 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='categories/', blank=True, null=True)
+    image = models.ImageField(upload_to='categories/%Y/%m/%d/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
@@ -52,6 +52,7 @@ class Post(models.Model):
     )
     slug = models.SlugField(unique=True, max_length=250)
     content = models.TextField()
+    image = models.ImageField(upload_to='posts/%Y/%m/%d/', blank=True, null=True)
     published_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
@@ -60,11 +61,11 @@ class Post(models.Model):
     status = models.CharField(max_length=10, choices=Status.choices, default='draft')
     objects = PostQuerySet.as_manager()
     
-   
+
     def get_absolute_url(self):
-       if not self.published_at:
-          return '/' 
-       return reverse(
+        if not self.published_at:
+            return '/' 
+        return reverse(
             "post_detail",
             args=[
                 self.published_at.year,
