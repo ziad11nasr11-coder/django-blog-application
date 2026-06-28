@@ -60,7 +60,8 @@ class Post(models.Model):
     likes = models.IntegerField(default=0)
     status = models.CharField(max_length=10, choices=Status.choices, default='draft')
     objects = PostQuerySet.as_manager()
-    
+    reading_time = models.PositiveIntegerField(default=0)
+    views = models.PositiveIntegerField(default=0)
 
     def get_absolute_url(self):
         if not self.published_at:
