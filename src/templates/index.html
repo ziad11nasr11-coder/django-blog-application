@@ -11,80 +11,33 @@
       <div class="main-grid">
         <!-- Left: Article feed -->
         <div class="feed" id="articleFeed">
-          <!-- Article card: large -->
-          <article class="article-card large" data-cat="technology">
-            <a href="#" class="card-img-wrap">
-              <div class="card-img tech-img">
-                <div class="img-abstract img-a1"></div>
-              </div>
-              <span class="card-badge">Technology</span>
-            </a>
-            <div class="card-content">
-              <h2 class="card-title">
-                <a href="#">Large Language Models Are Not What You Think They Are</a>
-              </h2>
-              <p class="card-excerpt">
-                The mental model most people hold about how AI "thinks" is
-                fundamentally flawed — and it leads to catastrophically bad
-                decisions about when to trust it.
-              </p>
-              <div class="card-footer">
-                <div class="card-author">
-                  <div class="avatar sm av3">MK</div>
-                  <span>Marcus Kim</span>
-                </div>
-                <div class="card-stats">
-                  <span class="stat">June 20</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat">9 min</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat views">
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                      />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    14.2k
-                  </span>
-                </div>
-              </div>
-            </div>
-          </article>
-
           <!-- Article card: regular -->
+          {% for post in posts %}
           <article class="article-card" data-cat="science">
-            <a href="#" class="card-img-wrap">
+            <a href="{% url 'post_detail' post.published_at.year post.published_at.month post.published_at.day post.slug %}" class="card-img-wrap">
               <div class="card-img sci-img">
                 <div class="img-abstract img-a2"></div>
               </div>
-              <span class="card-badge">Science</span>
+              <span class="card-badge">{{ post.category.name }}</span>
             </a>
             <div class="card-content">
               <h2 class="card-title">
-                <a href="#">The Gut-Brain Axis: Your Second Mind</a>
+                <a href="{% url 'post_detail' post.published_at.year post.published_at.month post.published_at.day post.slug %}">
+                  {{ post.title }}
+                </a>
               </h2>
               <p class="card-excerpt">
-                Researchers are uncovering a bidirectional neural highway
-                between your digestive system and your brain — with
-                startling implications for mental health.
+                {{ post.content|truncatewords:30 }}
               </p>
               <div class="card-footer">
                 <div class="card-author">
-                  <div class="avatar sm av4">SP</div>
-                  <span>Dr. Sofia Patel</span>
+                  <div class="avatar sm av4">{{ post.author.first_name|first }}{{ post.author.last_name|first }}</div>
+                  <span>{{ post.author }}</span>
                 </div>
                 <div class="card-stats">
-                  <span class="stat">June 18</span>
+                  <span class="stat">{{ post.published_at }}</span>
                   <span class="stat-sep">·</span>
-                  <span class="stat">11 min</span>
+                  <span class="stat">{{ post.reading_time }} min</span>
                   <span class="stat-sep">·</span>
                   <span class="stat views">
                     <svg
@@ -100,201 +53,13 @@
                       />
                       <circle cx="12" cy="12" r="3" />
                     </svg>
-                    9.8k
+                      {{ post.views }}
                   </span>
                 </div>
               </div>
             </div>
           </article>
-
-          <article class="article-card" data-cat="culture">
-            <a href="#" class="card-img-wrap">
-              <div class="card-img cult-img">
-                <div class="img-abstract img-a3"></div>
-              </div>
-              <span class="card-badge">Culture</span>
-            </a>
-            <div class="card-content">
-              <h2 class="card-title">
-                <a href="#">The Death and Rebirth of Slow Media</a>
-              </h2>
-              <p class="card-excerpt">
-                While attention spans collapse under the weight of the
-                algorithmic feed, a counter-movement is quietly rebuilding
-                the art of the long read.
-              </p>
-              <div class="card-footer">
-                <div class="card-author">
-                  <div class="avatar sm av1">EV</div>
-                  <span>Elena Vasquez</span>
-                </div>
-                <div class="card-stats">
-                  <span class="stat">June 15</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat">7 min</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat views">
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                      />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    7.1k
-                  </span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="article-card" data-cat="opinion">
-            <a href="#" class="card-img-wrap">
-              <div class="card-img op-img">
-                <div class="img-abstract img-a4"></div>
-              </div>
-              <span class="card-badge">Opinion</span>
-            </a>
-            <div class="card-content">
-              <h2 class="card-title">
-                <a href="#">We Were Wrong About Open Source AI</a>
-              </h2>
-              <p class="card-excerpt">
-                The argument for radical openness in AI development seemed
-                airtight three years ago. The evidence since then tells a
-                more complicated story.
-              </p>
-              <div class="card-footer">
-                <div class="card-author">
-                  <div class="avatar sm av2">TN</div>
-                  <span>Thomas Nkrumah</span>
-                </div>
-                <div class="card-stats">
-                  <span class="stat">June 12</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat">13 min</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat views">
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                      />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    18.5k
-                  </span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="article-card" data-cat="design">
-            <a href="#" class="card-img-wrap">
-              <div class="card-img des-img">
-                <div class="img-abstract img-a5"></div>
-              </div>
-              <span class="card-badge">Design</span>
-            </a>
-            <div class="card-content">
-              <h2 class="card-title">
-                <a href="#">Why Everything Looks the Same Now</a>
-              </h2>
-              <p class="card-excerpt">
-                The algorithmic convergence of aesthetics has produced a
-                global visual monoculture. Here's what designers are doing
-                to fight back.
-              </p>
-              <div class="card-footer">
-                <div class="card-author">
-                  <div class="avatar sm av3">AO</div>
-                  <span>Amara Osei</span>
-                </div>
-                <div class="card-stats">
-                  <span class="stat">June 10</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat">8 min</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat views">
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                      />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    11.3k
-                  </span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="article-card" data-cat="science">
-            <a href="#" class="card-img-wrap">
-              <div class="card-img sci-img" style="--hue: 180deg">
-                <div class="img-abstract img-a6"></div>
-              </div>
-              <span class="card-badge">Science</span>
-            </a>
-            <div class="card-content">
-              <h2 class="card-title">
-                <a href="#">Dark Matter: Still Missing, Still Fascinating</a>
-              </h2>
-              <p class="card-excerpt">
-                Decades of searching and we still can't find it — but every
-                null result teaches us something profound about the
-                structure of the universe.
-              </p>
-              <div class="card-footer">
-                <div class="card-author">
-                  <div class="avatar sm av4">LF</div>
-                  <span>Lena Fischer</span>
-                </div>
-                <div class="card-stats">
-                  <span class="stat">June 8</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat">10 min</span>
-                  <span class="stat-sep">·</span>
-                  <span class="stat views">
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                      />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    6.9k
-                  </span>
-                </div>
-              </div>
-            </div>
-          </article>
-
+          {% endfor %}
           <div class="load-more-wrap">
             <button class="btn-load-more" id="loadMore">
               Load more articles
