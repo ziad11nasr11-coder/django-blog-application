@@ -132,3 +132,13 @@ def post_comment(request, post_id):
         'form': form,
     })
 
+
+def category_posts(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+
+    posts = Post.objects.published().filter(category=category)
+
+    return render(request, "posts/category_posts.html", {
+        "category": category,
+        "posts": posts,
+    })

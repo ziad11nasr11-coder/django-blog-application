@@ -31,69 +31,29 @@
   </div>
 
   <!-- Popular this week -->
+  {% for post in trending_posts %}
   <div class="sidebar-widget">
-    <h3 class="sidebar-section-title">Popular this week</h3>
+    <h3 class="sidebar-section-title">Popular Posts</h3>
     <ol class="popular-list">
       <li class="popular-item">
         <span class="pop-num">01</span>
         <div class="pop-content">
-          <a href="#" class="pop-title"
-            >We Were Wrong About Open Source AI</a
+          <a href="{% url 'post_detail' post.published_at.year post.published_at.month post.published_at.day post.slug %}" class="pop-title"
+            >{{post.title}}</a
           >
-          <span class="pop-meta">Opinion · 13 min</span>
-        </div>
-      </li>
-      <li class="popular-item">
-        <span class="pop-num">02</span>
-        <div class="pop-content">
-          <a href="#" class="pop-title"
-            >Large Language Models Are Not What You Think</a
-          >
-          <span class="pop-meta">Technology · 9 min</span>
-        </div>
-      </li>
-      <li class="popular-item">
-        <span class="pop-num">03</span>
-        <div class="pop-content">
-          <a href="#" class="pop-title"
-            >Why Everything Looks the Same Now</a
-          >
-          <span class="pop-meta">Design · 8 min</span>
-        </div>
-      </li>
-      <li class="popular-item">
-        <span class="pop-num">04</span>
-        <div class="pop-content">
-          <a href="#" class="pop-title"
-            >The Quiet Revolution Reshaping How We Think</a
-          >
-          <span class="pop-meta">Featured · 12 min</span>
-        </div>
-      </li>
-      <li class="popular-item">
-        <span class="pop-num">05</span>
-        <div class="pop-content">
-          <a href="#" class="pop-title"
-            >The Death and Rebirth of Slow Media</a
-          >
-          <span class="pop-meta">Culture · 7 min</span>
+          <span class="pop-meta">{{post.category.name}} · {{post.reading_time}}</span>
         </div>
       </li>
     </ol>
   </div>
-
+  {% endfor %}
   <!-- Topics -->
   <div class="sidebar-widget">
     <h3 class="sidebar-section-title">Browse topics</h3>
     <div class="topic-grid">
-      <a href="#" class="topic-chip">Technology <span>48</span></a>
-      <a href="#" class="topic-chip">Science <span>31</span></a>
-      <a href="#" class="topic-chip">Culture <span>27</span></a>
-      <a href="#" class="topic-chip">Opinion <span>19</span></a>
-      <a href="#" class="topic-chip">Design <span>22</span></a>
-      <a href="#" class="topic-chip">Philosophy <span>14</span></a>
-      <a href="#" class="topic-chip">Health <span>18</span></a>
-      <a href="#" class="topic-chip">Climate <span>11</span></a>
+      {% for category in categories %}
+      <a href="{% url 'category_posts' category.slug %}" class="topic-chip">{{category.name}} <span>{{category.posts.count}}</span></a>
+      {% endfor %}
     </div>
   </div>
 

@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from posts.models import Post
+from posts.models import Post, Category
 
 def index(request):
     posts = Post.objects.published().order_by("-published_at")[:10]
+    categories = Category.objects.all()
 
     most_viewed = (
         Post.objects.published()
@@ -21,5 +22,6 @@ def index(request):
             "posts": posts,
             "most_viewed": most_viewed,
             "trending_posts": trending_posts,
+            "categories": categories,
         },
     )

@@ -37,5 +37,8 @@ urlpatterns = [
         "feed/",
         LatestPostsFeed(),
         name="post_feed"),
-
+    path(
+        "category/<slug:slug>/",
+        views.category_posts,
+        name="category_posts"),
 ]
