@@ -52,7 +52,7 @@
     <h3 class="sidebar-section-title">Browse topics</h3>
     <div class="topic-grid">
       {% for category in categories %}
-      <a href="{% url 'category_posts' category.slug %}" class="topic-chip">{{category.name}} <span>{{category.posts.count}}</span></a>
+      <a href="{% url 'post_list_by_category' category.slug %}" class="topic-chip">{{category.name}} <span>{{category.posts.count}}</span></a>
       {% endfor %}
     </div>
   </div>

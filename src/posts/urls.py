@@ -16,7 +16,7 @@ urlpatterns = [
     ),
     path(
         "category/<slug:category_slug>/",
-        views.post_list,
+        views.category_posts,
         name="post_list_by_category",
     ),
     path(
@@ -37,8 +37,4 @@ urlpatterns = [
         "feed/",
         LatestPostsFeed(),
         name="post_feed"),
-    path(
-        "category/<slug:slug>/",
-        views.category_posts,
-        name="category_posts"),
 ]
