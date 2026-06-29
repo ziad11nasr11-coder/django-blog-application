@@ -18,7 +18,7 @@ def index(request):
 
     return render(
         request,
-        "index.html",
+        "core/index.html",
         {
             "posts": posts,
             "most_viewed": most_viewed,
@@ -32,9 +32,28 @@ def about(request):
     categories = Category.objects.all()
     return render(
         request,
-        "about.html",
+        "core/about.html",
         {
             "authors": authors,
             "categories": categories,
         },
     )
+
+
+def write_for_us(request):
+    return render(request, "core/write_for_us.html")
+
+def our_writers(request):
+    return render(request, "core/our_writers.html")
+
+def contact(request):
+    return render(request, "core/contact.html")
+
+def privacy(request):
+    return render(request, "core/privacy.html")
+
+def terms(request):
+    return render(request, "core/terms.html")
+
+def cookies(request):
+    return render(request, "core/cookies.html")

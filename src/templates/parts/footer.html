@@ -43,20 +43,20 @@
         <div class="footer-col">
           <h4 class="footer-col-title">Topics</h4>
           <ul>
-            <li><a href="#">Technology</a></li>
-            <li><a href="#">Science</a></li>
-            <li><a href="#">Culture</a></li>
-            <li><a href="#">Opinion</a></li>
-            <li><a href="#">Design</a></li>
+            <li><a href="{% url 'post_list_by_category' category_slug='technology' %}">Technology</a></li>
+            <li><a href="{% url 'post_list_by_category' category_slug='science' %}">Science</a></li>
+            <li><a href="{% url 'post_list_by_category' category_slug='culture' %}">Culture</a></li>
+            <li><a href="{% url 'post_list_by_category' category_slug='opinion' %}">Opinion</a></li>
+            <li><a href="{% url 'post_list_by_category' category_slug='design' %}">design</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">Publication</h4>
           <ul>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Our writers</a></li>
-            <li><a href="#">Write for us</a></li>
-            <li><a href="#">Advertise</a></li>
+            <li><a href="{% url 'about' %}">About us</a></li>
+            <li><a href="{% url 'our_writers' %}">Our writers</a></li>
+            <li><a href="{% url 'write_for_us' %}">Write for us</a></li>
+            <li><a href="{% url 'contact' %}">Contact us</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -73,9 +73,9 @@
     <div class="footer-bottom">
       <p>© 2026 Meridian Publication. All rights reserved.</p>
       <div class="footer-legal">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Cookies</a>
+        <a href="{% url 'privacy' %}">Privacy</a>
+        <a href="{% url 'terms' %}">Terms</a>
+        <a href="{% url 'cookies' %}">Cookies</a>
       </div>
     </div>
   </div>
