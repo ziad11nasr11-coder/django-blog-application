@@ -60,11 +60,53 @@
             </div>
           </article>
           {% endfor %}
-          <div class="load-more-wrap">
-            <button class="btn-load-more" id="loadMore">
-              Load more articles
-            </button>
+          {% if posts.has_other_pages %}
+          <div class="pagination-wrap">
+            <nav class="pagination" aria-label="Post pages">
+
+              <!-- Previous -->
+              <div class="page-item {% if not posts.has_previous %}disabled{% endif %}">
+                <a class="page-link"
+                   {% if posts.has_previous %}href="?page={{ posts.previous_page_number }}"{% else %}aria-disabled="true"{% endif %}
+                   aria-label="Previous page">
+                  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                </a>
+              </div>
+
+              <!-- Page numbers with ellipsis -->
+              {% with page_num=posts.number total=posts.paginator.num_pages %}
+                {% if page_num > 3 %}
+                  <div class="page-item"><a class="page-link" href="?page=1">1</a></div>
+                  {% if page_num > 4 %}<span class="page-ellipsis">…</span>{% endif %}
+                {% endif %}
+
+                {% for i in posts.paginator.page_range %}
+                  {% if i >= page_num|add:"-2" and i <= page_num|add:"2" %}
+                    <div class="page-item {% if i == page_num %}active{% endif %}">
+                      <a class="page-link" href="?page={{ i }}"
+                         {% if i == page_num %}aria-current="page"{% endif %}>{{ i }}</a>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+
+                {% if page_num < total|add:"-2" %}
+                  {% if page_num < total|add:"-3" %}<span class="page-ellipsis">…</span>{% endif %}
+                  <div class="page-item"><a class="page-link" href="?page={{ total }}">{{ total }}</a></div>
+                {% endif %}
+              {% endwith %}
+
+              <!-- Next -->
+              <div class="page-item {% if not posts.has_next %}disabled{% endif %}">
+                <a class="page-link"
+                   {% if posts.has_next %}href="?page={{ posts.next_page_number }}"{% else %}aria-disabled="true"{% endif %}
+                   aria-label="Next page">
+                  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+              </div>
+
+            </nav>
           </div>
+          {% endif %}
         </div>
         <!-- /feed -->
 

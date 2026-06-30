@@ -137,14 +137,20 @@ def category_posts(request, slug=None, category_slug=None):
     category_slug_val = slug or category_slug
     category = get_object_or_404(Category, slug=category_slug_val)
 
-    posts = Post.objects.published().filter(category=category).order_by('-published_at')
-    
+    posts_qs = Post.objects.published().filter(category=category).order_by('-published_at')
+    total_count = posts_qs.count()
+
+    paginator = Paginator(posts_qs, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     trending_posts = Post.objects.published().order_by("-likes")[:5]
     categories = Category.objects.all()
 
     return render(request, "post/category_posts.html", {
         "category": category,
-        "posts": posts,
+        "posts": page_obj,
+        "total_count": total_count,
         "trending_posts": trending_posts,
         "categories": categories,
     })

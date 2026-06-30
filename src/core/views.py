@@ -1,10 +1,15 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from posts.models import Post, Category
 from users.models import Author
 
 def index(request):
-    posts = Post.objects.published().order_by("-published_at")[:10]
+    posts_qs = Post.objects.published().order_by("-published_at")
     categories = Category.objects.all()
+
+    paginator = Paginator(posts_qs, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     most_viewed = (
         Post.objects.published()
@@ -20,7 +25,7 @@ def index(request):
         request,
         "core/index.html",
         {
-            "posts": posts,
+            "posts": page_obj,
             "most_viewed": most_viewed,
             "trending_posts": trending_posts,
             "categories": categories,
