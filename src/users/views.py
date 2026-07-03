@@ -24,3 +24,10 @@ def login_view(request):
                 form.add_error(None, "Invalid username or password")
 
     return render(request, "userss/login.html", {"form": form})
+
+
+@login_required
+@require_POST
+def logout_view(request):
+    logout(request)
+    return redirect("login")
