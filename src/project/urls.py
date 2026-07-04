@@ -30,5 +30,6 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('users/', include('users.urls')),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}),
+    path('dashboard/', include('dashboard.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'posts',
     'users',
     'core',
+    'dashboard',
 ]
 AUTH_USER_MODEL = 'users.Author'
 
