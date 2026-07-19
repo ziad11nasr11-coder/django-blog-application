@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 def login_view(request):
     if request.user.is_authenticated:
