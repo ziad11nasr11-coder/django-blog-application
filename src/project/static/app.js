@@ -4,23 +4,27 @@
 
 /* ── NAVBAR SCROLL BEHAVIOR ── */
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
+if (navbar) {
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+}
 
 
 /* ── HAMBURGER MENU ── */
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('navLinks');
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('mobile-open');
-  const open = navLinks.classList.contains('mobile-open');
-  hamburger.setAttribute('aria-expanded', open);
-});
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('mobile-open');
+    const open = navLinks.classList.contains('mobile-open');
+    hamburger.setAttribute('aria-expanded', open);
+  });
+}
 
 document.addEventListener('click', (e) => {
-  if (!navbar.contains(e.target)) {
+  if (navbar && navLinks && !navbar.contains(e.target)) {
     navLinks.classList.remove('mobile-open');
   }
 });
@@ -33,20 +37,22 @@ const searchClose   = document.getElementById('searchClose');
 const searchInput   = document.getElementById('searchInput');
 
 function openSearch() {
+  if (!searchOverlay || !searchInput) return;
   searchOverlay.classList.add('open');
   setTimeout(() => searchInput.focus(), 50);
 }
 function closeSearch() {
+  if (!searchOverlay || !searchInput) return;
   searchOverlay.classList.remove('open');
   searchInput.value = '';
 }
 
-searchBtn.addEventListener('click', openSearch);
-searchClose.addEventListener('click', closeSearch);
+if (searchBtn) searchBtn.addEventListener('click', openSearch);
+if (searchClose) searchClose.addEventListener('click', closeSearch);
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && searchOverlay.classList.contains('open')) closeSearch();
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+  if (e.key === 'Escape' && searchOverlay && searchOverlay.classList.contains('open')) closeSearch();
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k' && searchOverlay) { e.preventDefault(); openSearch(); }
 });
 
 
@@ -85,20 +91,23 @@ const articleData = [
   { el: 5, views: 6900,  minutes: 10, date: new Date('2026-06-08') },
 ];
 
-sortSelect.addEventListener('change', () => {
-  const cards = Array.from(articleFeed.querySelectorAll('.article-card[data-cat]'));
-  const loadBtn = articleFeed.querySelector('.load-more-wrap');
+if (sortSelect && articleFeed) {
+  sortSelect.addEventListener('change', () => {
+    const cards = Array.from(articleFeed.querySelectorAll('.article-card[data-cat]'));
+    const loadBtn = articleFeed.querySelector('.load-more-wrap');
 
-  const sorted = [...articleData].sort((a, b) => {
-    if (sortSelect.value === 'popular') return b.views - a.views;
-    if (sortSelect.value === 'long')    return b.minutes - a.minutes;
-    return b.date - a.date;
-  });
+    const sorted = [...articleData].sort((a, b) => {
+      if (sortSelect.value === 'popular') return b.views - a.views;
+      if (sortSelect.value === 'long')    return b.minutes - a.minutes;
+      return b.date - a.date;
+    });
 
-  sorted.forEach(d => {
-    articleFeed.insertBefore(cards[d.el], loadBtn);
+    sorted.forEach(d => {
+      if (!cards[d.el]) return;
+      articleFeed.insertBefore(cards[d.el], loadBtn);
+    });
   });
-});
+}
 
 
 /* ── NEWSLETTER FORM ── */
@@ -140,49 +149,51 @@ const moreArticles = [
 ];
 let loaded = false;
 
-loadMoreBtn.addEventListener('click', () => {
-  if (loaded) return;
-  loaded = true;
-  loadMoreBtn.textContent = 'Loading…';
-  loadMoreBtn.disabled = true;
+if (loadMoreBtn && articleFeed) {
+  loadMoreBtn.addEventListener('click', () => {
+    if (loaded) return;
+    loaded = true;
+    loadMoreBtn.textContent = 'Loading…';
+    loadMoreBtn.disabled = true;
 
-  setTimeout(() => {
-    const wrap = loadMoreBtn.closest('.load-more-wrap');
-    moreArticles.forEach(data => {
-      const article = document.createElement('article');
-      article.className = 'article-card';
-      article.dataset.cat = data.cat;
-      article.style.animation = 'fadeIn 0.35s ease both';
-      article.innerHTML = `
-        <a href="#" class="card-img-wrap">
-          <div class="card-img ${data.cat}-img"><div class="img-abstract img-a1"></div></div>
-          <span class="card-badge" style="text-transform:capitalize">${data.cat}</span>
-        </a>
-        <div class="card-content">
-          <h2 class="card-title"><a href="#">${data.title}</a></h2>
-          <p class="card-excerpt">A thoughtful exploration of ideas that challenge the way we understand our world, written with clarity and depth.</p>
-          <div class="card-footer">
-            <div class="card-author">
-              <div class="avatar sm av3">${data.author.split(' ').map(n=>n[0]).join('')}</div>
-              <span>${data.author}</span>
+    setTimeout(() => {
+      const wrap = loadMoreBtn.closest('.load-more-wrap');
+      moreArticles.forEach(data => {
+        const article = document.createElement('article');
+        article.className = 'article-card';
+        article.dataset.cat = data.cat;
+        article.style.animation = 'fadeIn 0.35s ease both';
+        article.innerHTML = `
+          <a href="#" class="card-img-wrap">
+            <div class="card-img ${data.cat}-img"><div class="img-abstract img-a1"></div></div>
+            <span class="card-badge" style="text-transform:capitalize">${data.cat}</span>
+          </a>
+          <div class="card-content">
+            <h2 class="card-title"><a href="#">${data.title}</a></h2>
+            <p class="card-excerpt">A thoughtful exploration of ideas that challenge the way we understand our world, written with clarity and depth.</p>
+            <div class="card-footer">
+              <div class="card-author">
+                <div class="avatar sm av3">${data.author.split(' ').map(n=>n[0]).join('')}</div>
+                <span>${data.author}</span>
+              </div>
+              <div class="card-stats">
+                <span class="stat">${data.date}</span>
+                <span class="stat-sep">·</span>
+                <span class="stat">${data.mins} min</span>
+                <span class="stat-sep">·</span>
+                <span class="stat views">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  ${data.views}
+                </span>
+              </div>
             </div>
-            <div class="card-stats">
-              <span class="stat">${data.date}</span>
-              <span class="stat-sep">·</span>
-              <span class="stat">${data.mins} min</span>
-              <span class="stat-sep">·</span>
-              <span class="stat views">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                ${data.views}
-              </span>
-            </div>
-          </div>
-        </div>`;
-      articleFeed.insertBefore(article, wrap);
-    });
-    wrap.remove();
-  }, 600);
-});
+          </div>`;
+        articleFeed.insertBefore(article, wrap);
+      });
+      if (wrap) wrap.remove();
+    }, 600);
+  });
+}
 
 
 /* ── HERO ABSTRACT ART ── */

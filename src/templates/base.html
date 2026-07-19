@@ -12,6 +12,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'style.css' %}" />
+    {% block extra_css %}
+    {% endblock %}
   </head>
   <body>
     {% include 'parts/navbar.html' %}

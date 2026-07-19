@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Meridian | Editorial Desk{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+  <div class="container contact-hero-grid">
+    <div class="contact-hero-copy">
+      <div class="hero-kicker">
+        <span class="kicker-dot"></span>
+        Contact Meridian
+      </div>
+      <h1 class="contact-hero-title">Reach the editors behind the ideas.</h1>
+      <p class="contact-hero-desc">
+        Send us a note about stories, partnerships, corrections, pitches, or
+        reader feedback. The right message always finds a careful pair of eyes.
+      </p>
+    </div>
+
+    <aside class="contact-hero-card" aria-label="Editorial response time">
+      <span class="contact-card-label">Response window</span>
+      <strong>Usually within 2 business days</strong>
+      <p>
+        For urgent corrections, include the article title and publication date
+        so our editorial team can review it quickly.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="container contact-main-grid">
+    <div class="contact-info-column">
+      <div class="contact-section-heading">
+        <p class="contact-eyebrow">Contact information</p>
+        <h2>Start with the desk that fits your note.</h2>
+      </div>
+
+      <div class="contact-info-list">
+        <article class="contact-info-card">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16v16H4z" />
+              <path d="m22 6-10 7L2 6" />
+            </svg>
+          </span>
+          <div>
+            <h3>Email</h3>
+            <a href="mailto:hello@meridian.blog">hello@meridian.blog</a>
+            <p>Reader notes, partnerships, and general questions.</p>
+          </div>
+        </article>
+
+        <article class="contact-info-card">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.9.68 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.84.55 2.8.68A2 2 0 0 1 22 16.92z" />
+            </svg>
+          </span>
+          <div>
+            <h3>Phone</h3>
+            <a href="tel:+12025550148">+1 (202) 555-0148</a>
+            <p>Monday to Friday, 9:00 AM - 5:00 PM ET.</p>
+          </div>
+        </article>
+
+        <article class="contact-info-card">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </span>
+          <div>
+            <h3>Address</h3>
+            <p>214 Meridian Avenue, Suite 8B<br />New York, NY 10013</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="contact-social-card">
+        <h3>Follow the conversation</h3>
+        <div class="contact-social-links">
+          <a href="#" aria-label="Meridian on Twitter or X">X</a>
+          <a href="#" aria-label="Meridian on LinkedIn">in</a>
+          <a href="#" aria-label="Meridian RSS feed">RSS</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-panel">
+      <p class="contact-eyebrow">Send a message</p>
+      <h2>Tell us what you are working on.</h2>
+      <form class="contact-form" aria-label="Contact form">
+        <div class="contact-form-row">
+          <label for="contact-name">Name</label>
+          <input id="contact-name" name="name" type="text" placeholder="Your name" autocomplete="name" />
+        </div>
+
+        <div class="contact-form-row">
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+
+        <div class="contact-form-row">
+          <label for="contact-subject">Subject</label>
+          <input id="contact-subject" name="subject" type="text" placeholder="Pitch, correction, partnership..." />
+        </div>
+
+        <div class="contact-form-row">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="7" placeholder="Share the useful details here."></textarea>
+        </div>
+
+        <button class="contact-submit" type="button">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="contact-map-section">
+  <div class="container contact-map-grid">
+    <div class="contact-map-copy">
+      <p class="contact-eyebrow">Where we work</p>
+      <h2>Editorial roots in New York, writers everywhere.</h2>
+      <p>
+        Meridian operates from a small editorial office while collaborating with
+        contributors across cities, disciplines, and time zones.
+      </p>
+    </div>
+    <div class="map-placeholder" role="img" aria-label="Map placeholder for Meridian office location">
+      <div class="map-pin" aria-hidden="true"></div>
+      <span>Embedded map placeholder</span>
+      <p>214 Meridian Avenue, New York</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section contact-faq-section">
+  <div class="container">
+    <div class="contact-section-heading">
+      <p class="contact-eyebrow">FAQ</p>
+      <h2>Before you write.</h2>
+    </div>
+
+    <div class="faq-grid">
+      <article class="faq-card">
+        <h3>Can I pitch an article?</h3>
+        <p>
+          Yes. Send a concise summary, why it matters now, and links to recent
+          work if you have them.
+        </p>
+      </article>
+      <article class="faq-card">
+        <h3>How do I report a correction?</h3>
+        <p>
+          Include the article URL, the detail that needs review, and any source
+          material that helps verify the change.
+        </p>
+      </article>
+      <article class="faq-card">
+        <h3>Do you accept partnerships?</h3>
+        <p>
+          We consider editorially aligned collaborations, research briefings,
+          events, and newsletter partnerships.
+        </p>
+      </article>
+      <article class="faq-card">
+        <h3>Will every message receive a reply?</h3>
+        <p>
+          We read every note. Replies depend on volume and whether the message
+          needs direct follow-up.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact-cta">
+  <div class="container contact-cta-inner">
+    <div>
+      <p class="contact-eyebrow">Keep reading</p>
+      <h2>Not ready to send a note?</h2>
+      <p>
+        Explore the latest Meridian stories and get a feel for the kind of work
+        our editors are looking for.
+      </p>
+    </div>
+    <a href="{% url 'home' %}" class="contact-cta-button">Browse articles</a>
+  </div>
+</section>
+{% endblock %}
