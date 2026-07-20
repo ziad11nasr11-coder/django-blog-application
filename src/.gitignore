@@ -49,5 +49,6 @@ Thumbs.db
 *.bak
 *.tmp
 
+.env
 
 outline.md
