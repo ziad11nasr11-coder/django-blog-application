@@ -15,3 +15,10 @@ class CommentForm(forms.ModelForm):
                 }
             ),
         }
+    def clean_body(self):
+        body = self.cleaned_data["body"].strip()
+
+        if not body:
+            raise forms.ValidationError("Comment cannot be empty.")
+
+        return body
