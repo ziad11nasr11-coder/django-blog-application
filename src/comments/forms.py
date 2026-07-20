@@ -6,19 +6,19 @@ from .models import Comment
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ("body",)
+        fields = ("content",)
         widgets = {
-            "body": forms.Textarea(
+            "content": forms.Textarea(
                 attrs={
                     "rows": 4,
                     "placeholder": "Write your comment...",
                 }
             ),
         }
-    def clean_body(self):
-        body = self.cleaned_data["body"].strip()
+    def clean_content(self):
+        content = self.cleaned_data["content"].strip()
 
-        if not body:
+        if not content:
             raise forms.ValidationError("Comment cannot be empty.")
 
-        return body
+        return content

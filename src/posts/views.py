@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.db.models import Count
-
-from .models import Post, Comment, Category
-from .forms import EmailPostForm, CommentForm
+from comments.models import Comment
+from .models import Post, Category
+from .forms import EmailPostForm
+from comments.forms import CommentForm
 
 try:
     from taggit.models import Tag
@@ -46,7 +47,8 @@ def post_detail(request, year, month, day, slug):
         published_at__day=day,
     )
 
-    comments = post.comments.filter(active=True)
+    comments = post.comments.filter(
+    status=CommentStatus.APPROVED)
     form = CommentForm()
 
     post_tags_ids = post.tags.values_list('id', flat=True)

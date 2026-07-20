@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Category
+from .models import Post, Category
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -17,14 +17,5 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at', 'updated_at', 'published_at')
     list_display_links = ('title', 'slug')
-    show_facets = admin.ShowFacets.ALWAYS
-
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('post', 'name', 'email', 'active', 'created_at')
-    search_fields = ['content', 'name', 'email']
-    list_filter = ('active', 'created_at')
-    date_hierarchy = 'created_at'
-    readonly_fields = ('created_at', 'updated_at')
     show_facets = admin.ShowFacets.ALWAYS
 

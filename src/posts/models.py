@@ -84,26 +84,3 @@ class Post(models.Model):
         verbose_name = 'post'
         verbose_name_plural = 'posts'
     
-class CommentQuerySet(models.QuerySet):
-
-    def approved(self):
-        return self.filter(active=True)
-
-    def pending(self):
-        return self.filter(active=False)
-class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=False)
-    objects = CommentQuerySet.as_manager()
-    def __str__(self):
-        return f'Comment by {self.name} on {self.post}'
-    class Meta:
-        ordering = ['created_at']
-        verbose_name = 'comment'
-        verbose_name_plural = 'comments'
-    
