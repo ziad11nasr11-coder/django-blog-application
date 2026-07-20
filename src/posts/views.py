@@ -6,6 +6,7 @@ from comments.models import Comment
 from .models import Post, Category
 from .forms import EmailPostForm
 from comments.forms import CommentForm
+from django.contrib import messages
 
 try:
     from taggit.models import Tag
@@ -64,6 +65,11 @@ def post_detail(request, year, month, day, slug):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
+            messages.success(
+            request,
+            "Your comment has been submitted and is waiting for approval."
+            )
+
             return redirect(post.get_absolute_url())
     return render(request, 'post/detail.html', {
         'post': post,
