@@ -47,9 +47,7 @@ def post_detail(request, year, month, day, slug):
         published_at__day=day,
     )
 
-    comments = post.comments.filter(
-    status=CommentStatus.APPROVED)
-    form = CommentForm()
+    comments = post.comments.approved()
 
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = (
@@ -119,7 +117,7 @@ def post_comment(request, post_id):
     else:
         form = CommentForm()
     
-    comments = post.comments.filter(active=True)
+    comments = post.comments.approved()
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = (
         Post.objects.published()

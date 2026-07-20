@@ -63,13 +63,23 @@
           <!-- Add Comment Form -->
           <div class="comment-form-wrap" style="margin-top: 32px; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f7fafc;">
             <h4 style="font-size: 1.25rem; margin-bottom: 16px;">Leave a Comment</h4>
-            <form method="post" action="">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <button type="submit" class="btn-read" style="border: none; cursor: pointer; padding: 10px 20px; background-color: #1a202c; color: white; border-radius: 6px; font-weight: 500; margin-top: 10px;">
-                Submit Comment
-              </button>
-            </form>
+
+              <form method="post">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                <div style="color: #e53e3e; margin-bottom: 16px;">
+                  Please correct the errors below.
+                </div>
+                {% endif %}
+                {{ form.as_p }}
+
+                <button type="submit"
+                        class="btn-read"
+                        style="border: none; cursor: pointer; padding: 10px 20px; background-color: #1a202c; color: white; border-radius: 6px; font-weight: 500; margin-top: 10px;">
+                        Submit Comment
+                </button>
+              </form>
           </div>
         </div>
       </div>
