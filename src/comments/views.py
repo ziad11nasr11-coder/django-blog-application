@@ -16,6 +16,12 @@ def post_comment(request, post_id):
             comment = form.save(commit=False)
             comment.post = post
             comment.ip_address = get_client_ip(request)
+
+            if request.user.is_authenticated:
+                comment.author = request.user
+                comment.name = request.user.username
+                comment.email = request.user.email
+                
             comment.save()
         return redirect(post.get_absolute_url())
     else:

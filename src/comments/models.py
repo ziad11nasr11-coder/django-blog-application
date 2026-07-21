@@ -18,6 +18,14 @@ class Comment(models.Model):
         APPROVED = "approved", "Approved"
         REJECTED = "rejected", "Rejected"
 
+    author = models.ForeignKey(
+    settings.AUTH_USER_MODEL,
+    on_delete=models.SET_NULL,
+    null=True,
+    blank=True,
+    related_name="comments",
+    )
+    
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
@@ -35,7 +43,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     ip_address = models.GenericIPAddressField(null=True,blank=True)
-    
+
     objects = CommentQuerySet.as_manager()
 
     class Meta:
