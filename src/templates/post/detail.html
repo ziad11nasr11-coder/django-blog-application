@@ -45,7 +45,7 @@
 
         <!-- Comments Section -->
         <div class="comments-section" style="margin-top: 48px;">
-          <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Comments ({{ comments.count }})</h3>
+          <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Comments ({{ comments.paginator.count }})</h3>
           <div class="comments-list">
             {% for comment in comments %}
               <div class="comment-item" style="padding: 16px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px;">
@@ -59,6 +59,119 @@
               <p style="color: #718096;">No approved comments yet. Be the first to comment!</p>
             {% endfor %}
           </div>
+          {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} — Meridian{% endblock %}
+
+{% block content %}
+<section class="articles-section">
+  <div class="container">
+    <div class="main-grid">
+      <!-- Left: Article Detail -->
+      <div class="feed">
+        <article class="article-card large">
+          {% if post.image %}
+            <div class="card-img-wrap">
+              <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; height: auto; border-radius: 8px;" />
+            </div>
+          {% endif %}
+          <div class="card-content" style="padding-top: 20px;">
+            {% if post.category %}
+              <span class="card-badge">{{ post.category.name }}</span>
+            {% endif %}
+            <h1 class="card-title" style="font-size: 2.5rem; margin: 12px 0; line-height: 1.2;">
+              {{ post.title }}
+            </h1>
+            
+            <div class="card-footer" style="margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between;">
+              <div class="card-author" style="display: flex; align-items: center; gap: 8px;">
+                <span class="avatar sm" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: #e2e8f0; border-radius: 50%; font-size: 0.85rem; font-weight: bold;">
+                  {{ post.author.username|slice:":2"|upper }}
+                </span>
+                <span>{{ post.author.username }}</span>
+              </div>
+              <div class="card-stats">
+                <span class="stat">{{ post.published_at|date:"M j, Y" }}</span>
+                <span class="stat-sep">·</span>
+                <span class="stat views">{{ post.views }} views</span>
+              </div>
+            </div>
+
+            <div class="post-body" style="font-size: 1.15rem; line-height: 1.8; color: #4a5568;">
+              {{ post.content|linebreaks }}
+            </div>
+          </div>
+        </article>
+
+        <!-- Comments Section -->
+        <div class="comments-section" style="margin-top: 48px;">
+          <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Comments ({{ comments.paginator.count }})</h3>
+          <div class="comments-list">
+            {% for comment in comments %}
+              <div class="comment-item" style="padding: 16px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px;">
+                <div style="font-weight: 600; display: flex; justify-content: space-between;">
+                  <span>{{ comment.name }}</span>
+                  <span style="font-size: 0.85rem; color: #a0aec0; font-weight: normal;">{{ comment.created_at|date:"M j, Y" }}</span>
+                </div>
+                <div style="margin-top: 8px; color: #4a5568;">{{ comment.content|linebreaks }}</div>
+              </div>
+            {% empty %}
+              <p style="color: #718096;">No approved comments yet. Be the first to comment!</p>
+            {% endfor %}
+          </div>
+
+          {% if comments.has_other_pages %}
+          <div class="pagination">
+
+            {% if comments.has_previous %}
+            <a href="?comments_page={{ comments.previous_page_number }}">
+              Previous
+            </a>
+            {% endif %}
+            <span>
+                Page {{ comments.number }}
+                of {{ comments.paginator.num_pages }}
+            </span>
+            {% if comments.has_next %}
+            <a href="?comments_page={{ comments.next_page_number }}">
+            Next
+            </a>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          <!-- Add Comment Form -->
+          <div class="comment-form-wrap" style="margin-top: 32px; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f7fafc;">
+            <h4 style="font-size: 1.25rem; margin-bottom: 16px;">Leave a Comment</h4>
+
+              <form method="post">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                <div style="color: #e53e3e; margin-bottom: 16px;">
+                  Please correct the errors below.
+                </div>
+                {% endif %}
+                {{ form.as_p }}
+
+                <button type="submit"
+                        class="btn-read"
+                        style="border: none; cursor: pointer; padding: 10px 20px; background-color: #1a202c; color: white; border-radius: 6px; font-weight: 500; margin-top: 10px;">
+                        Submit Comment
+                </button>
+              </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Sidebar -->
+      {% include 'parts/sidebar.html' %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
 
           <!-- Add Comment Form -->
           <div class="comment-form-wrap" style="margin-top: 32px; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f7fafc;">

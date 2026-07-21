@@ -7,6 +7,7 @@ from .models import Post, Category
 from .forms import EmailPostForm
 from comments.forms import CommentForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 try:
     from taggit.models import Tag
@@ -48,7 +49,10 @@ def post_detail(request, year, month, day, slug):
         published_at__day=day,
     )
 
-    comments = post.comments.approved()
+    comments_list = post.comments.approved()
+    paginator = Paginator(comments_list, 10)
+    page_number = request.GET.get("comments_page")
+    comments = paginator.get_page(page_number)
 
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = (
@@ -136,6 +140,7 @@ def post_comment(request, post_id):
         'post': post,
         'comments': comments,
         'form': form,
+        'similar_posts': similar_posts,     
     })
 
 
