@@ -10,7 +10,7 @@ def post_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
 
     if request.method == 'POST':
-        form = CommentForm(request.POST)
+        form = CommentForm(request.POST, user=request.user)
 
         if form.is_valid():
             comment = form.save(commit=False)
@@ -21,7 +21,7 @@ def post_comment(request, post_id):
                 comment.author = request.user
                 comment.name = request.user.username
                 comment.email = request.user.email
-                
+
             comment.save()
         return redirect(post.get_absolute_url())
     else:

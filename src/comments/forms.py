@@ -1,6 +1,8 @@
 from django import forms
+
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV2Checkbox
+
 from .models import Comment
 
 
@@ -11,10 +13,12 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
+
         fields = (
             "name",
             "email",
             "content",
+            "captcha",
         )
 
         widgets = {
@@ -35,6 +39,13 @@ class CommentForm(forms.ModelForm):
                 }
             ),
         }
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if user and user.is_authenticated:
+            self.fields.pop("name")
+            self.fields.pop("email")
 
     def clean_content(self):
         content = self.cleaned_data.get("content", "").strip()
