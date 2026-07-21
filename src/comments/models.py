@@ -34,6 +34,8 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    ip_address = models.GenericIPAddressField(null=True,blank=True)
+    
     objects = CommentQuerySet.as_manager()
 
     class Meta:
