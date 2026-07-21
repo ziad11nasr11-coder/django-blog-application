@@ -50,7 +50,32 @@
             {% for comment in comments %}
               <div class="comment-item" style="padding: 16px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px;">
                 <div style="font-weight: 600; display: flex; justify-content: space-between;">
-                  <span>{{ comment.name }}</span>
+                  <div style="display: flex; align-items: center; gap: 10px;">
+
+                    {% if comment.author %}
+                        <span class="avatar sm"
+                              style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: #e2e8f0; border-radius: 50%; font-size: 0.85rem; font-weight: bold;">
+                            {{ comment.author.username|slice:":2"|upper }}
+                        </span>
+
+                        <span>
+                            {{ comment.author.username }}
+                        </span>
+
+                    {% else %}
+                        <span class="avatar sm"
+                              style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: #e2e8f0; border-radius: 50%; font-size: 0.85rem; font-weight: bold;">
+                            {{ comment.name|slice:":2"|upper }}
+                        </span>
+
+                        <span>
+                            {{ comment.name }}
+                        </span>
+
+                    {% endif %}
+
+                  </div>
+                  
                   <span style="font-size: 0.85rem; color: #a0aec0; font-weight: normal;">{{ comment.created_at|date:"M j, Y" }}</span>
                 </div>
                 <div style="margin-top: 8px; color: #4a5568;">{{ comment.content|linebreaks }}</div>
