@@ -7,7 +7,7 @@ from .models import Post, Category
 from .forms import EmailPostForm
 from django.contrib import messages
 from django.core.paginator import Paginator
-
+from comments.forms import CommentForm
 try:
     from taggit.models import Tag
 except ImportError:
@@ -63,7 +63,7 @@ def post_detail(request, year, month, day, slug):
     )
 
     if request.method == 'POST':
-        form = CommentForm(request.POST)
+        form = CommentForm(request.POST, user=request.user)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
