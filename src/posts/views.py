@@ -8,6 +8,8 @@ from .forms import EmailPostForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from comments.forms import CommentForm
+from django.db.models import Q
+
 try:
     from taggit.models import Tag
 except ImportError:
@@ -133,3 +135,30 @@ def category_posts(request, slug=None, category_slug=None):
         "trending_posts": trending_posts,
         "categories": categories,
     })
+
+def search_posts(request):
+    query = request.GET.get("q", "").strip()
+
+    posts = Post.objects.published()
+
+    if query:
+        posts = posts.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query)
+        ).distinct()
+
+    paginator = Paginator(posts, 10)
+
+    page_number = request.GET.get("page")
+
+    page_obj = paginator.get_page(page_number)
+
+    return render(
+        request,
+        "post/search.html",
+        {
+            "query": query,
+            "posts": page_obj,
+            "results_count": paginator.count,
+        },
+    )
