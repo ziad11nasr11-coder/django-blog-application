@@ -139,13 +139,23 @@ def category_posts(request, slug=None, category_slug=None):
 def search_posts(request):
     query = request.GET.get("q", "").strip()
 
-    posts = Post.objects.published()
+    posts = (
+        Post.objects.published()
+        .select_related(
+            "author",
+            "category",
+        )
+    )
 
     if query:
-        posts = posts.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query)
-        ).distinct()
+        posts = (
+            posts.filter(
+                Q(title__icontains=query)
+                | Q(content__icontains=query)
+                | Q(tags__name__icontains=query)
+            )
+            .distinct()
+        )
 
     paginator = Paginator(posts, 10)
 
