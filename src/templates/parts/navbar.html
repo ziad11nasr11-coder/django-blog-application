@@ -5,12 +5,74 @@
       Meridian
     </a>
     <nav class="nav-links" id="navLinks">
+    <style>
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.search-input {
+    width: 220px;
+    padding: 8px 12px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+
+    font-size: 14px;
+}
+
+
+.search-input:focus {
+    outline: none;
+    border-color: #1a202c;
+}
+
+
+.search-button {
+
+    padding: 8px 16px;
+
+    background-color: #1a202c;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-weight: 500;
+
+}
+
+
+.search-button:hover {
+
+    opacity: 0.85;
+
+}
+
+</style>
       <a href="{% url 'home' %}" class="nav-link active">Home</a>
       <a href="{% url 'post_list_by_category' category_slug='technology' %}" class="nav-link">Technology</a>
       <a href="{% url 'post_list_by_category' category_slug='science' %}" class="nav-link">Science</a>
       <a href="{% url 'post_list_by_category' category_slug='culture' %}" class="nav-link">Culture</a>
       <a href="{% url 'post_list_by_category' category_slug='opinion' %}" class="nav-link">Opinion</a>
       <a href="{% url 'about' %}" class="nav-link">About</a>
+      <form action="{% url 'post_search' %}" method="get" class="search-form">
+        <input
+        type="search"
+        name="q"
+        value="{{ request.GET.q }}"
+        placeholder="Search articles..."
+        >
+
+        <button type="submit">
+        Search
+        </button>
+      </form>
     </nav>
     <div class="nav-actions">
       <button class="btn-search" id="searchBtn" aria-label="Open search">

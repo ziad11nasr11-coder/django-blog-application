@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Search Results — Meridian
+{% endblock %}
+
+{% block content %}
+<section class="container" style="margin-top: 40px; margin-bottom: 30px;">
+  <h1 style="font-size: 2rem;">
+    Search results for: "{{ query }}"
+  </h1>
+  <p style="color: #718096;">
+    {{ posts.paginator.count }} result{{ posts.paginator.count|pluralize }} found
+  </p>
+</section>
+
+<section class="articles-section">
+  <div class="container">
+    <div class="main-grid">
+
+      <!-- Left: Search Results -->
+      <div class="feed" id="articleFeed">
+
+        {% for post in posts %}
+          <article class="article-card">
+
+            <a href="{% url 'post_detail' post.published_at.year post.published_at.month post.published_at.day post.slug %}" class="card-img-wrap">
+              <div class="card-img sci-img">
+                <div class="img-abstract img-a2"></div>
+              </div>
+
+              {% if post.category %}
+                <span class="card-badge">
+                  {{ post.category.name }}
+                </span>
+              {% endif %}
+            </a>
+
+            <div class="card-content">
+              <h2 class="card-title">
+                <a href="{% url 'post_detail' post.published_at.year post.published_at.month post.published_at.day post.slug %}">
+                  {{ post.title }}
+                </a>
+              </h2>
+
+              <p class="card-excerpt">
+                {{ post.content|truncatewords:30 }}
+              </p>
+
+              <div class="card-footer">
+                <div class="card-author">
+                  <div class="avatar sm av4">
+                    {{ post.author.first_name|first }}
+                    {{ post.author.last_name|first }}
+                  </div>
+                  <span>
+                    {{ post.author }}
+                  </span>
+                </div>
+
+                <div class="card-stats">
+                  <span class="stat">
+                    {{ post.published_at|date:"M j, Y" }}
+                  </span>
+
+                  <span class="stat-sep">·</span>
+
+                  <span class="stat">
+                    {{ post.reading_time }} min
+                  </span>
+
+                  <span class="stat-sep">·</span>
+
+                  <span class="stat views">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    {{ post.views }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </article>
+        {% empty %}
+          <div style="padding: 30px;">
+            <h3>No posts found.</h3>
+            <p style="color:#718096;">
+              Try searching with different keywords.
+            </p>
+          </div>
+        {% endfor %}
+
+        {% if posts.has_other_pages %}
+          <div class="pagination-wrap">
+            <nav class="pagination" aria-label="Search pages">
+
+              {% if posts.has_previous %}
+                <div class="page-item">
+                  <a class="page-link" href="?q={{ query }}&page={{ posts.previous_page_number }}">
+                    Previous
+                  </a>
+                </div>
+              {% endif %}
+
+              {% for i in posts.paginator.page_range %}
+                <div class="page-item {% if posts.number == i %}active{% endif %}">
+                  <a class="page-link" href="?q={{ query }}&page={{ i }}">
+                    {{ i }}
+                  </a>
+                </div>
+              {% endfor %}
+
+              {% if posts.has_next %}
+                <div class="page-item">
+                  <a class="page-link" href="?q={{ query }}&page={{ posts.next_page_number }}">
+                    Next
+                  </a>
+                </div>
+              {% endif %}
+
+            </nav>
+          </div>
+        {% endif %}
+
+      </div>
+
+      <!-- Right: Sidebar -->
+      {% include 'parts/sidebar.html' %}
+
+    </div>
+  </div>
+</section>
+{% endblock %}

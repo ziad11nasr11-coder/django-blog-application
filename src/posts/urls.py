@@ -31,5 +31,11 @@ urlpatterns = [
     path(
         "feed/",
         LatestPostsFeed(),
-        name="post_feed"),
+        name="post_feed"
+    ),
+    path("search/",
+        views.search_posts,
+        name="post_search",
+    ),
+
 ]
