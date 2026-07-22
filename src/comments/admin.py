@@ -1,21 +1,28 @@
 from django.contrib import admin
-
+from django.contrib import messages
 from .models import Comment
 
 
 @admin.action(description="Approve selected comments")
 def approve_comments(modeladmin, request, queryset):
-    queryset.update(
-        status=Comment.Status.APPROVED
+    updated = queryset.update(status=Comment.Status.APPROVED)
+
+    modeladmin.message_user(
+        request,
+        f"{updated} comment(s) approved successfully.",
+        level=messages.SUCCESS,
     )
 
 
 @admin.action(description="Reject selected comments")
 def reject_comments(modeladmin, request, queryset):
-    queryset.update(
-        status=Comment.Status.REJECTED
-    )
+    updated = queryset.update(status=Comment.Status.REJECTED)
 
+    modeladmin.message_user(
+        request,
+        f"{updated} comment(s) rejected successfully.",
+        level=messages.WARNING,
+    )
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
