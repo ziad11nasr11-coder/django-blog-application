@@ -7,7 +7,7 @@ from django.views.decorators.http import require_POST
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect("index")
+        return redirect("home")
 
     form = LoginForm()
 
@@ -21,15 +21,15 @@ def login_view(request):
 
             if user is not None:
                 login(request, user)
-                return redirect("index")
+                return redirect("home")
             else:
                 form.add_error(None, "Invalid username or password")
 
-    return render(request, "userss/login.html", {"form": form})
+    return render(request, "users/login.html", {"form": form})
 
 
 @login_required
 @require_POST
 def logout_view(request):
     logout(request)
-    return redirect("login")
+    return redirect("home")

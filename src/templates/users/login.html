@@ -1,0 +1,76 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | Meridian Blog</title>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+  <main class="auth">
+    <section class="auth__card" aria-labelledby="login-title">
+      <header class="auth__header">
+        <a class="auth__brand" href="{% url 'home' %}" aria-label="Meridian home">
+          <span class="auth__brand-mark" aria-hidden="true">M</span>
+          <span class="auth__brand-name">Meridian</span>
+        </a>
+        <h1 class="auth__title" id="login-title">Login</h1>
+        <p class="auth__subtitle">Welcome back. Sign in to continue to your blog account.</p>
+      </header>
+
+      <form class="auth-form" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="auth-form__error" role="alert">
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+
+        <div class="auth-form__group">
+          <label class="auth-form__label" for="id_username">Username</label>
+          <input
+            class="auth-form__control"
+            id="id_username"
+            name="username"
+            type="text"
+            autocomplete="username"
+            placeholder="Enter your username"
+            required
+          >
+        </div>
+
+        <div class="auth-form__group">
+          <label class="auth-form__label" for="id_password">Password</label>
+          <input
+            class="auth-form__control"
+            id="id_password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Enter your password"
+            required
+          >
+        </div>
+
+        <div class="auth-form__meta">
+          <label class="auth-form__check" for="remember-me">
+            <input class="auth-form__checkbox" id="remember-me" name="remember" type="checkbox">
+            <span>Remember me</span>
+          </label>
+          <a class="auth-form__link" href="{% url 'password_reset' %}">Forgot password?</a>
+        </div>
+
+        <button class="auth-form__button" type="submit">Login</button>
+
+        <p class="auth-form__footer">
+          Don't have an account?
+          <a class="auth-form__link" href="#">Register</a>
+        </p>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
