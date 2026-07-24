@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy | Meridian Blog{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/privacy.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section class="privacy-hero">
+  <div class="container privacy-hero__inner">
+    <nav class="privacy-breadcrumb" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>Privacy Policy</span>
+    </nav>
+    <h1 class="privacy-hero__title">Privacy Policy</h1>
+    <p class="privacy-hero__intro">
+      We respect your privacy and are committed to protecting the information
+      you share while reading, subscribing, commenting, or interacting with
+      Meridian.
+    </p>
+  </div>
+</section>
+
+<section class="privacy-section">
+  <div class="container privacy-layout">
+    <aside class="privacy-summary" aria-label="Policy summary">
+      <span class="privacy-eyebrow">Last Updated</span>
+      <strong>July 2026</strong>
+      <p>
+        This policy explains what information we collect, how we use it, and
+        the choices available to you.
+      </p>
+    </aside>
+
+    <div class="privacy-content">
+      <article class="privacy-card">
+        <h2>Introduction</h2>
+        <p>
+          This Privacy Policy describes how Meridian collects, uses, stores,
+          and protects information when you visit our website or use our blog
+          features. By using the site, you agree to the practices described here.
+        </p>
+      </article>
+
+      <div class="privacy-principles-grid" aria-label="Privacy principles">
+        <article class="privacy-principle-card">
+          <span class="privacy-principle-card__icon" aria-hidden="true">D</span>
+          <h3>Data Protection</h3>
+          <p>We apply reasonable safeguards to protect personal information from misuse.</p>
+        </article>
+        <article class="privacy-principle-card">
+          <span class="privacy-principle-card__icon" aria-hidden="true">T</span>
+          <h3>Transparency</h3>
+          <p>We explain what we collect and why in clear, readable language.</p>
+        </article>
+        <article class="privacy-principle-card">
+          <span class="privacy-principle-card__icon" aria-hidden="true">U</span>
+          <h3>User Control</h3>
+          <p>You can manage preferences, request changes, or contact us with questions.</p>
+        </article>
+        <article class="privacy-principle-card">
+          <span class="privacy-principle-card__icon" aria-hidden="true">S</span>
+          <h3>Secure Storage</h3>
+          <p>We keep information only as long as needed for legitimate purposes.</p>
+        </article>
+      </div>
+
+      <article class="privacy-card">
+        <h2>Information We Collect</h2>
+        <p>
+          We may collect information you provide directly, such as your name,
+          email address, account details, comments, contact messages, and
+          newsletter preferences. We may also collect technical information such
+          as browser type, device data, IP address, and usage activity.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>How We Use Your Information</h2>
+        <p>
+          We use information to operate the site, manage accounts, publish and
+          moderate comments, send requested updates, respond to messages,
+          improve content quality, protect the service, and understand how
+          readers interact with Meridian.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Cookies and Tracking Technologies</h2>
+        <p>
+          We use cookies and similar technologies to keep the website secure,
+          remember preferences, measure performance, and improve the reading
+          experience. You can manage cookies through your browser settings.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Sharing of Information</h2>
+        <p>
+          We do not sell personal information. We may share limited information
+          with service providers that help us operate the website, comply with
+          legal obligations, prevent abuse, or protect the rights and safety of
+          our readers and publication.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Data Security</h2>
+        <p>
+          We use reasonable administrative, technical, and organizational
+          measures to protect information. No online service is completely
+          secure, but we work to reduce risks and respond responsibly to issues.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Data Retention</h2>
+        <p>
+          We retain information only for as long as needed to provide services,
+          maintain records, resolve disputes, meet legal obligations, and
+          support legitimate editorial or operational purposes.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Your Rights</h2>
+        <p>
+          Depending on your location, you may have rights to access, correct,
+          delete, restrict, or object to certain uses of your personal
+          information. You may contact us to make a privacy-related request.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Third-Party Services</h2>
+        <p>
+          Meridian may link to or use third-party services such as analytics,
+          embeds, newsletter tools, or social platforms. Their privacy practices
+          are governed by their own policies.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Children's Privacy</h2>
+        <p>
+          Meridian is not directed to children, and we do not knowingly collect
+          personal information from children. If you believe a child has provided
+          personal information, please contact us.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Changes to This Privacy Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. When changes are
+          made, we will update the last updated date and, where appropriate,
+          provide additional notice.
+        </p>
+      </article>
+
+      <article class="privacy-card">
+        <h2>Contact Information</h2>
+        <p>
+          If you have questions about this Privacy Policy or how your
+          information is handled, please contact the Meridian team.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="privacy-cta">
+  <div class="container privacy-cta__inner">
+    <div>
+      <span class="privacy-eyebrow">Privacy Support</span>
+      <h2>Questions about your privacy?</h2>
+      <p>Contact us and we will help clarify how your information is handled.</p>
+    </div>
+    <a class="privacy-button" href="{% url 'contact' %}">Contact Us</a>
+  </div>
+</section>
+{% endblock %}
