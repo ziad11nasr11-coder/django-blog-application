@@ -56,7 +56,36 @@
             <div class="post-body" style="font-size: 1.15rem; line-height: 1.8; color: #4a5568;">
               {{ post.content|linebreaks }}
             </div>
+              <!-- Post Tags -->
+            {% with tags=post.tags.all %}
+            {% if tags %}
+              <div class="post-tags" style="margin-top: 30px;">
 
+                <h4 style="margin-bottom: 12px;">
+                  Tags:
+                </h4>
+
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+
+                {% for tag in tags %}
+                  <a href="{% url 'post_list_by_tag' tag.slug %}"
+                     style="
+                      padding:6px 12px;
+                      background:#edf2f7;
+                      border-radius:20px;
+                      text-decoration:none;
+                      color:#1a202c;
+                      font-size:14px;
+                    ">
+                #{{ tag.name }}
+                  </a>
+                {% endfor %}
+
+              </div>
+
+            </div>
+            {% endif %}
+            {% endwith %}
           </div>
         </article>
 
