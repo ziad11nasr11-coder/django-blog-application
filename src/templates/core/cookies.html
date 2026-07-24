@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cookies Policy | Meridian Blog{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cookies.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section class="cookies-hero">
+  <div class="container cookies-hero__inner">
+    <nav class="cookies-breadcrumb" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>Cookies Policy</span>
+    </nav>
+    <h1 class="cookies-hero__title">Cookies Policy</h1>
+    <p class="cookies-hero__intro">
+      We use cookies to keep Meridian reliable, understand how readers use the
+      site, and improve the reading experience without adding unnecessary noise.
+    </p>
+  </div>
+</section>
+
+<section class="cookies-section">
+  <div class="container cookies-layout">
+    <aside class="cookies-summary" aria-label="Policy summary">
+      <span class="cookies-eyebrow">Last Updated</span>
+      <strong>July 2026</strong>
+      <p>
+        This policy explains what cookies are, which categories we use, and how
+        you can manage your preferences.
+      </p>
+    </aside>
+
+    <div class="cookies-content">
+      <article class="cookies-card">
+        <h2>What Are Cookies?</h2>
+        <p>
+          Cookies are small text files stored on your device when you visit a
+          website. They help the site remember basic information, improve
+          performance, and provide a smoother experience across pages.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>Types of Cookies We Use</h2>
+        <p>
+          Meridian uses a limited set of cookies to operate the website,
+          measure performance, remember helpful preferences, and support trusted
+          third-party services where needed.
+        </p>
+      </article>
+
+      <div class="cookie-category-grid" aria-label="Cookie categories">
+        <article class="cookie-category-card">
+          <span class="cookie-category-card__icon" aria-hidden="true">E</span>
+          <h3>Essential</h3>
+          <p>Required for core site features such as security, sessions, and page delivery.</p>
+        </article>
+        <article class="cookie-category-card">
+          <span class="cookie-category-card__icon" aria-hidden="true">A</span>
+          <h3>Analytics</h3>
+          <p>Helps us understand reading patterns and improve content quality.</p>
+        </article>
+        <article class="cookie-category-card">
+          <span class="cookie-category-card__icon" aria-hidden="true">F</span>
+          <h3>Functional</h3>
+          <p>Remembers useful preferences that make the site easier to use.</p>
+        </article>
+        <article class="cookie-category-card">
+          <span class="cookie-category-card__icon" aria-hidden="true">M</span>
+          <h3>Marketing</h3>
+          <p>May support campaign measurement or relevant publication updates.</p>
+        </article>
+      </div>
+
+      <article class="cookies-card">
+        <h2>Essential Cookies</h2>
+        <p>
+          Essential cookies make the website work correctly. They may support
+          authentication, security protections, form submissions, and basic site
+          navigation. These cookies cannot usually be disabled without affecting
+          how the website functions.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>Performance &amp; Analytics Cookies</h2>
+        <p>
+          Performance and analytics cookies help us understand which articles
+          readers find useful, how pages perform, and where we can improve the
+          site experience. We use this information in aggregate whenever possible.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>Functional Cookies</h2>
+        <p>
+          Functional cookies remember choices such as display preferences,
+          saved settings, or repeat interactions. They help make future visits
+          feel more consistent and less repetitive.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>Third-Party Cookies</h2>
+        <p>
+          Some embedded tools, analytics providers, or content services may set
+          their own cookies. These third parties are responsible for their own
+          cookie practices, and their policies may explain additional choices.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>How We Use Cookies</h2>
+        <p>
+          We use cookies to keep the site secure, load pages efficiently,
+          understand content performance, remember preferences, and improve
+          editorial products such as newsletters and article recommendations.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>Managing Cookie Preferences</h2>
+        <p>
+          You can manage cookie preferences through your browser settings.
+          Depending on your browser, you may be able to delete existing cookies,
+          block new cookies, or receive alerts before cookies are stored.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>Disabling Cookies</h2>
+        <p>
+          Disabling cookies may affect some parts of the website. Essential
+          features may stop working, saved preferences may be lost, and some
+          pages may not behave as expected.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>Changes to This Policy</h2>
+        <p>
+          We may update this Cookies Policy as our website, tools, or legal
+          requirements change. When we make material updates, we will revise the
+          last updated date shown on this page.
+        </p>
+      </article>
+
+      <article class="cookies-card">
+        <h2>Contact Information</h2>
+        <p>
+          If you have questions about this policy or how Meridian uses cookies,
+          please contact our editorial team.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cookies-cta">
+  <div class="container cookies-cta__inner">
+    <div>
+      <span class="cookies-eyebrow">Questions</span>
+      <h2>Have questions about our Cookies Policy?</h2>
+      <p>Send us a note and we will help clarify how cookies are used on Meridian.</p>
+    </div>
+    <a class="cookies-button" href="{% url 'contact' %}">Contact Us</a>
+  </div>
+</section>
+{% endblock %}
