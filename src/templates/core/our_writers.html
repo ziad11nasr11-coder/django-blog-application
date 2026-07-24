@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Writers | Meridian Blog{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/our_writers.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="writers-page">
+    <section class="writers-hero">
+      <div class="container writers-hero__inner">
+        <p class="section-kicker">Editorial Team</p>
+        <h1 class="writers-hero__title">Meet Our Writers</h1>
+        <p class="writers-hero__subtitle">
+          Thoughtful authors, editors, and analysts shaping stories on technology,
+          culture, science, and the ideas moving modern life forward.
+        </p>
+      </div>
+    </section>
+
+    <section class="section writers">
+      <div class="container">
+        <div class="section__header">
+          <p class="section-kicker">Writers</p>
+          <h2 class="section__title">Voices behind the publication</h2>
+          <p class="section__description">
+            Meet the people who research, report, edit, and publish Meridian's
+            most useful stories.
+          </p>
+        </div>
+
+        <div class="writers-grid">
+          <article class="writer-card">
+            <img class="writer-card__image" src="https://placehold.co/160x160?text=EW" alt="Portrait of Emma Wilson">
+            <div class="writer-card__body">
+              <h3 class="writer-card__name">Emma Wilson</h3>
+              <p class="writer-card__role">Senior Writer</p>
+              <p class="writer-card__bio">
+                Covers digital culture, emerging platforms, and how technology
+                changes creative work.
+              </p>
+              <dl class="writer-card__stats">
+                <div class="writer-card__stat">
+                  <dt>Articles</dt>
+                  <dd>128</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Experience</dt>
+                  <dd>9y</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Followers</dt>
+                  <dd>42k</dd>
+                </div>
+              </dl>
+              <div class="writer-card__socials" aria-label="Emma Wilson social links">
+                <a href="#" aria-label="Emma Wilson on X">X</a>
+                <a href="#" aria-label="Emma Wilson on LinkedIn">in</a>
+                <a href="#" aria-label="Emma Wilson on GitHub">GH</a>
+              </div>
+              <a class="button button--secondary" href="#">View Profile</a>
+            </div>
+          </article>
+
+          <article class="writer-card">
+            <img class="writer-card__image" src="https://placehold.co/160x160?text=MP" alt="Portrait of Marcus Patel">
+            <div class="writer-card__body">
+              <h3 class="writer-card__name">Marcus Patel</h3>
+              <p class="writer-card__role">Technology Editor</p>
+              <p class="writer-card__bio">
+                Edits deep dives on AI, software, startups, and the systems
+                reshaping everyday tools.
+              </p>
+              <dl class="writer-card__stats">
+                <div class="writer-card__stat">
+                  <dt>Articles</dt>
+                  <dd>96</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Experience</dt>
+                  <dd>11y</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Followers</dt>
+                  <dd>31k</dd>
+                </div>
+              </dl>
+              <div class="writer-card__socials" aria-label="Marcus Patel social links">
+                <a href="#" aria-label="Marcus Patel on X">X</a>
+                <a href="#" aria-label="Marcus Patel on LinkedIn">in</a>
+                <a href="#" aria-label="Marcus Patel on GitHub">GH</a>
+              </div>
+              <a class="button button--secondary" href="#">View Profile</a>
+            </div>
+          </article>
+
+          <article class="writer-card">
+            <img class="writer-card__image" src="https://placehold.co/160x160?text=AR" alt="Portrait of Ana Reyes">
+            <div class="writer-card__body">
+              <h3 class="writer-card__name">Dr. Ana Reyes</h3>
+              <p class="writer-card__role">Science Author</p>
+              <p class="writer-card__bio">
+                Translates research in health, cognition, and climate into
+                clear, reader-friendly analysis.
+              </p>
+              <dl class="writer-card__stats">
+                <div class="writer-card__stat">
+                  <dt>Articles</dt>
+                  <dd>74</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Experience</dt>
+                  <dd>8y</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Followers</dt>
+                  <dd>27k</dd>
+                </div>
+              </dl>
+              <div class="writer-card__socials" aria-label="Ana Reyes social links">
+                <a href="#" aria-label="Ana Reyes on X">X</a>
+                <a href="#" aria-label="Ana Reyes on LinkedIn">in</a>
+                <a href="#" aria-label="Ana Reyes on GitHub">GH</a>
+              </div>
+              <a class="button button--secondary" href="#">View Profile</a>
+            </div>
+          </article>
+
+          <article class="writer-card">
+            <img class="writer-card__image" src="https://placehold.co/160x160?text=JL" alt="Portrait of Julian Lee">
+            <div class="writer-card__body">
+              <h3 class="writer-card__name">Julian Lee</h3>
+              <p class="writer-card__role">Culture Writer</p>
+              <p class="writer-card__bio">
+                Writes essays on media, design, cities, and the social patterns
+                hidden inside everyday habits.
+              </p>
+              <dl class="writer-card__stats">
+                <div class="writer-card__stat">
+                  <dt>Articles</dt>
+                  <dd>112</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Experience</dt>
+                  <dd>7y</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Followers</dt>
+                  <dd>35k</dd>
+                </div>
+              </dl>
+              <div class="writer-card__socials" aria-label="Julian Lee social links">
+                <a href="#" aria-label="Julian Lee on X">X</a>
+                <a href="#" aria-label="Julian Lee on LinkedIn">in</a>
+                <a href="#" aria-label="Julian Lee on GitHub">GH</a>
+              </div>
+              <a class="button button--secondary" href="#">View Profile</a>
+            </div>
+          </article>
+
+          <article class="writer-card">
+            <img class="writer-card__image" src="https://placehold.co/160x160?text=NH" alt="Portrait of Nora Hassan">
+            <div class="writer-card__body">
+              <h3 class="writer-card__name">Nora Hassan</h3>
+              <p class="writer-card__role">Opinion Editor</p>
+              <p class="writer-card__bio">
+                Shapes sharp, fair arguments on public life, business, and the
+                ethics of modern innovation.
+              </p>
+              <dl class="writer-card__stats">
+                <div class="writer-card__stat">
+                  <dt>Articles</dt>
+                  <dd>89</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Experience</dt>
+                  <dd>10y</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Followers</dt>
+                  <dd>24k</dd>
+                </div>
+              </dl>
+              <div class="writer-card__socials" aria-label="Nora Hassan social links">
+                <a href="#" aria-label="Nora Hassan on X">X</a>
+                <a href="#" aria-label="Nora Hassan on LinkedIn">in</a>
+                <a href="#" aria-label="Nora Hassan on GitHub">GH</a>
+              </div>
+              <a class="button button--secondary" href="#">View Profile</a>
+            </div>
+          </article>
+
+          <article class="writer-card">
+            <img class="writer-card__image" src="https://placehold.co/160x160?text=SK" alt="Portrait of Sofia Kim">
+            <div class="writer-card__body">
+              <h3 class="writer-card__name">Sofia Kim</h3>
+              <p class="writer-card__role">Author</p>
+              <p class="writer-card__bio">
+                Reports on product strategy, remote work, creator tools, and
+                practical lessons from modern teams.
+              </p>
+              <dl class="writer-card__stats">
+                <div class="writer-card__stat">
+                  <dt>Articles</dt>
+                  <dd>67</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Experience</dt>
+                  <dd>6y</dd>
+                </div>
+                <div class="writer-card__stat">
+                  <dt>Followers</dt>
+                  <dd>19k</dd>
+                </div>
+              </dl>
+              <div class="writer-card__socials" aria-label="Sofia Kim social links">
+                <a href="#" aria-label="Sofia Kim on X">X</a>
+                <a href="#" aria-label="Sofia Kim on LinkedIn">in</a>
+                <a href="#" aria-label="Sofia Kim on GitHub">GH</a>
+              </div>
+              <a class="button button--secondary" href="#">View Profile</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--muted featured-writer">
+      <div class="container featured-writer__grid">
+        <div class="featured-writer__media">
+          <img src="https://placehold.co/640x760?text=Featured+Writer" alt="Portrait of featured writer Emma Wilson">
+        </div>
+        <div class="featured-writer__content">
+          <p class="section-kicker">Featured Writer</p>
+          <h2 class="featured-writer__name">Emma Wilson</h2>
+          <p class="featured-writer__role">Senior Writer, Digital Culture</p>
+          <p class="featured-writer__bio">
+            Emma writes at the intersection of technology, culture, and creative
+            work. Her reporting focuses on the people behind platform shifts,
+            the new habits created by digital tools, and the questions that
+            appear when innovation meets everyday life.
+          </p>
+          <blockquote class="featured-writer__quote">
+            "The best stories help readers see familiar technology with new
+            language, sharper context, and a little more agency."
+          </blockquote>
+          <dl class="featured-writer__stats">
+            <div>
+              <dt>Published Articles</dt>
+              <dd>128</dd>
+            </div>
+            <div>
+              <dt>Years Reporting</dt>
+              <dd>9</dd>
+            </div>
+            <div>
+              <dt>Monthly Readers</dt>
+              <dd>240k</dd>
+            </div>
+          </dl>
+          <a class="button button--primary" href="#">Read Articles</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section join-team">
+      <div class="container join-team__inner">
+        <p class="section-kicker">Join Our Team</p>
+        <h2 class="join-team__title">Have a story worth publishing?</h2>
+        <p class="join-team__description">
+          We welcome guest writers with original reporting, thoughtful analysis,
+          and clear ideas for readers who care about substance.
+        </p>
+        <a class="button button--primary" href="#">Become a Writer</a>
+      </div>
+    </section>
+  </div>
+{% endblock %}
