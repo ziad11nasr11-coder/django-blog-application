@@ -17,11 +17,11 @@ except ImportError:
 
 
 def post_list(request, tag_slug=None, category_slug=None):
-    posts = Post.objects.published().order_by('-published_at')
+    posts = (Post.objects.published().select_related("author", "category").order_by("-published_at"))
     tag = None
     category = None
 
-    if tag_slug and Tag:
+    if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         posts = posts.filter(tags__in=[tag])
 
