@@ -5,6 +5,24 @@
 {% block meta_description %}
 {{ post.meta_description|default:post.content|striptags|truncatewords:25 }}
 {% endblock %}
+{% block meta_tags %}
+
+<meta property="og:type" content="article">
+
+<meta property="og:title" content="{{ post.title }}">
+
+<meta property="og:description"
+      content="{{ post.meta_description|default:post.content|striptags|truncatewords:25 }}">
+
+<meta property="og:url"
+      content="{{ request.build_absolute_uri }}">
+
+{% if post.image %}
+<meta property="og:image"
+      content="{{ request.scheme }}://{{ request.get_host }}{{ post.image.url }}">
+{% endif %}
+
+{% endblock %}
 {% block content %}
 <section class="articles-section">
   <div class="container">
