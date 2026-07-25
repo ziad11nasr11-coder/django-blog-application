@@ -17,10 +17,23 @@
 <meta property="og:url"
       content="{{ request.build_absolute_uri }}">
 
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title"
+      content="{{ post.title }}">
+
+<meta name="twitter:description"
+      content="{{ post.meta_description|default:post.content|striptags|truncatewords:25 }}">
+
+{% if post.image %}
+<meta name="twitter:image"
+      content="{{ request.scheme }}://{{ request.get_host }}{{ post.image.url }}">
+{% endif %}
 {% if post.image %}
 <meta property="og:image"
       content="{{ request.scheme }}://{{ request.get_host }}{{ post.image.url }}">
 {% endif %}
+
 
 {% endblock %}
 {% block content %}
