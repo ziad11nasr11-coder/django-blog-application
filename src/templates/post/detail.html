@@ -36,6 +36,11 @@
 
 
 {% endblock %}
+
+{% block canonical %}
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+{% endblock %}
+
 {% block content %}
 <section class="articles-section">
   <div class="container">
