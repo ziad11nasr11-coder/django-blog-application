@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+Server Error — Meridian
+{% endblock %}
+
+{% block content %}
+
+<section style="text-align:center; padding:80px 20px;">
+
+    <h1 style="font-size:80px;">
+        500
+    </h1>
+
+    <h2>
+        Something went wrong
+    </h2>
+
+    <p style="color:#718096;">
+        We are working on fixing the problem.
+    </p>
+
+    <a href="{% url 'home' %}"
+       class="btn-read">
+        Back to Home
+    </a>
+
+</section>
+
+{% endblock %}
