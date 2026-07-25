@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block title %}{{ post.title }} — Meridian{% endblock %}
-
+{% block meta_description %}
+{{ post.meta_description|default:post.content|striptags|truncatewords:25 }}
+{% endblock %}
 {% block content %}
 <section class="articles-section">
   <div class="container">

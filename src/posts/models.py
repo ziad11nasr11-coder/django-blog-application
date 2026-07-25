@@ -52,6 +52,7 @@ class Post(models.Model):
     )
     slug = models.SlugField(unique=True, max_length=250)
     content = models.TextField()
+    meta_description = models.CharField(max_length=160, blank=True)
     image = models.ImageField(upload_to='posts/%Y/%m/%d/', blank=True, null=True)
     published_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(default=timezone.now)
