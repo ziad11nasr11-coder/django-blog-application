@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from posts.models import Post, Category
 from users.models import Author
+from django.http import HttpResponse
+from django.urls import reverse
 
 def index(request):
     posts_qs = Post.objects.published().order_by("-published_at")
@@ -62,3 +64,17 @@ def terms(request):
 
 def cookies(request):
     return render(request, "core/cookies.html")
+
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Disallow: /admin/",
+        "Disallow: /accounts/",
+        "",
+        f"Sitemap: {request.build_absolute_uri(reverse('sitemap'))}",
+    ]
+
+    return HttpResponse(
+        "\n".join(lines),
+        content_type="text/plain",
+    )

@@ -10,4 +10,6 @@ urlpatterns = [
     path("privacy/", views.privacy, name="privacy"),
     path("terms/", views.terms, name="terms"),
     path("cookies", views.cookies, name="cookies"),
+    path("robots.txt",views.robots_txt,name="robots_txt",),
+
 ]
