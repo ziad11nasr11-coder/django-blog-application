@@ -41,6 +41,41 @@
 <link rel="canonical" href="{{ request.build_absolute_uri }}">
 {% endblock %}
 
+{% block structured_data %}
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+
+    "headline": "{{ post.title|escapejs }}",
+
+    "description": "{{ post.meta_description|escapejs }}",
+
+    "author": {
+        "@type": "Person",
+        "name": "{{ post.author.username|escapejs }}"
+    },
+
+    "publisher": {
+        "@type": "Organization",
+        "name": "Meridian"
+    },
+
+    "datePublished": "{{ post.published_at|date:'c' }}",
+
+    "dateModified": "{{ post.updated_at|date:'c' }}",
+
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ request.build_absolute_uri }}"
+    }
+
+}
+</script>
+
+{% endblock %}
+
 {% block content %}
 <section class="articles-section">
   <div class="container">

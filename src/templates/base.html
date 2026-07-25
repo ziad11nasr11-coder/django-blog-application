@@ -18,8 +18,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'style.css' %}" />
+
+    {% block structured_data %}{% endblock %}
+    
     {% block extra_css %}
     {% endblock %}
+
+
   </head>
   <body>
     {% include 'parts/navbar.html' %}
