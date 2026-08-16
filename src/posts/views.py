@@ -132,8 +132,6 @@ def category_posts(request, slug=None, category_slug=None):
         "category": category,
         "posts": page_obj,
         "total_count": total_count,
-        "trending_posts": trending_posts,
-        "categories": categories,
     })
 
 def search_posts(request):
