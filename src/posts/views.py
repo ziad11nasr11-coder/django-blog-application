@@ -51,38 +51,48 @@ def post_detail(request, year, month, day, slug):
     )
 
     comments_list = post.comments.approved()
+
     paginator = Paginator(comments_list, 10)
     page_number = request.GET.get("comments_page")
     comments = paginator.get_page(page_number)
 
-    post_tags_ids = post.tags.values_list('id', flat=True)
+    post_tags_ids = post.tags.values_list("id", flat=True)
+
     similar_posts = (
         Post.objects.published()
         .filter(tags__in=post_tags_ids)
         .exclude(id=post.id)
-        .annotate(same_tags=Count('tags'))
-        .order_by('-same_tags', '-published_at')[:4]
+        .annotate(same_tags=Count("tags"))
+        .order_by("-same_tags", "-published_at")[:4]
     )
 
-    if request.method == 'POST':
+    form = CommentForm(user=request.user)
+
+    if request.method == "POST":
         form = CommentForm(request.POST, user=request.user)
+
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
+
             messages.success(
-            request,
-            "Your comment has been submitted and is waiting for approval."
+                request,
+                "Your comment has been submitted and is waiting for approval.",
             )
 
             return redirect(post.get_absolute_url())
-    return render(request, 'post/detail.html', {
-        'post': post,
-        'comments': comments,
-        'form': form,
-        'similar_posts': similar_posts,
-    })
 
+    return render(
+        request,
+        "post/detail.html",
+        {
+            "post": post,
+            "comments": comments,
+            "form": form,
+            "similar_posts": similar_posts,
+        },
+    )
 
 def post_share(request, post_id):
     post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
