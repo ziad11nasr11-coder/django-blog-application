@@ -64,6 +64,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'project.urls'
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "meridian-cache",
+    }
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
