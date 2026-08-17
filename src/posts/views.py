@@ -1,14 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.core.paginator import Paginator
-from django.core.mail import send_mail
-from django.db.models import Count
-from comments.models import Comment
-from .models import Post, Category
-from .forms import EmailPostForm
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
+from django.db.models import Count, Q
+from django.shortcuts import get_object_or_404, redirect, render
+
 from comments.forms import CommentForm
-from django.db.models import Q
+
+from .forms import EmailPostForm
+from .models import Category, Post
 
 try:
     from taggit.models import Tag
@@ -67,21 +66,6 @@ def post_detail(request, year, month, day, slug):
     )
 
     form = CommentForm(user=request.user)
-
-    if request.method == "POST":
-        form = CommentForm(request.POST, user=request.user)
-
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.save()
-
-            messages.success(
-                request,
-                "Your comment has been submitted and is waiting for approval.",
-            )
-
-            return redirect(post.get_absolute_url())
 
     return render(
         request,
